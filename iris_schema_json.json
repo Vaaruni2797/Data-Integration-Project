@@ -1,0 +1,7 @@
+{
+	"sepalLength":"$..sepalLength",
+	"sepalWidth":"$..sepalWidth",
+	"petalLength":"$..petalLength",
+	"petalWidth":"$..petalWidth",
+	"species":"$..species"
+}
