@@ -48,5 +48,6 @@
     "mash_temp": "$.[*].method.mash_temp.[*].temp.value",
     "ferment_temp": "$.[*].method.fermentation.temp.value",
     "twist": "$.[*].method.twist"
-  }
+  },
+  "sql_query": "SELECT * FROM ingredients LIMIT 10;"
 }
