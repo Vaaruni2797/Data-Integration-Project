@@ -1,3 +1,6 @@
+DSE 203
+--------
+
 JSON to Relational SQL Table Converter (Project by Vaaruni Desai, Chris Vanhook, Zufeshan Imran)
 
 This is a Python script that converts a JSON file into relational SQL tables using the SQLite database engine. The script leverages the sqlite3 library for database operations and the jsonpath library to extract data from the JSON file.
