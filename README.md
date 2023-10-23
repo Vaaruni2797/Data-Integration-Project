@@ -6,6 +6,7 @@ Args:
 json_file: The path to the input JSON file. The json_file is going to be user-provided
 mapping_config: User defined relational schema mapping(config.json).
 db_file: The path to the SQL database file. 
+sql_query: Query that user wants to execute (Note: Currently single query is being supported)
 
 Prerequisites:
 pip install requirements.txt
