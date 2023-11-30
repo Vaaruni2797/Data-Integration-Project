@@ -50,6 +50,10 @@ def readData(filename):
         reader = csv.DictReader(f)
         for row in reader:
             clean_row = [(k, preProcess(v)) for (k, v) in row.items()]
+            #combine given_name and surname into name
+            clean_row.append(('name',f"{clean_row[1][1]} {clean_row[2][1]}"))
+            #combine street,address_1,address_2 into address
+            clean_row.append(('address',f"{clean_row[3][1]} {clean_row[4][1]} {clean_row[5][1]}"))
             row_id = int(row['rec_id'])
             data_d[row_id] = dict(clean_row)
 
@@ -97,15 +101,17 @@ if __name__ == '__main__':
 
         # Define the fields dedupe will pay attention to
         fields = [
-            {'field': ' given_name', 'type': 'String','has missing': True},
-            {'field': ' surname', 'type': 'String','has missing': True},
-            {'field': ' street_number', 'type': 'String','has missing': True},
-            {'field': ' address_1', 'type': 'String','has missing': True},
-            {'field': ' address_2', 'type': 'String','has missing': True},
+            #{'field': ' given_name', 'type': 'String','has missing': True},
+            #{'field': ' surname', 'type': 'String','has missing': True},
+            #{'field': ' street_number', 'type': 'String','has missing': True},
+            #{'field': ' address_1', 'type': 'String','has missing': True},
+            #{'field': ' address_2', 'type': 'String','has missing': True},
             {'field': ' suburb', 'type': 'String','has missing': True},
             {'field': ' postcode', 'type': 'Exact','has missing': False},
             {'field': ' state', 'type': 'String', 'has missing': True},
-            {'field': ' date_of_birth', 'type': 'String', 'has missing': True},
+            #{'field': ' date_of_birth', 'type': 'String', 'has missing': True},
+            {'field': 'name', 'type': 'String','has missing': True},
+            {'field': 'address', 'type': 'String','has missing': True}
             ]
 
         # Create a new deduper object and pass our data model to it.
@@ -171,7 +177,7 @@ if __name__ == '__main__':
     with open(output_file, 'w') as f_output, open(input_file) as f_input:
 
         reader = csv.DictReader(f_input)
-        fieldnames = ['Cluster ID', 'confidence_score'] + reader.fieldnames
+        fieldnames =  reader.fieldnames + ['Cluster ID', 'confidence_score']
 
         writer = csv.DictWriter(f_output, fieldnames=fieldnames)
         writer.writeheader()
